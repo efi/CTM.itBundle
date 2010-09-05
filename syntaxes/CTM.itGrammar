@@ -1,0 +1,104 @@
+﻿{
+	comment: 'CTM Syntax: version 1.0 by Thomas Efer'
+	file_types: [ 'ctm'	]
+	key_equivalent: 'Ctrl+Alt+Shift+C'
+	title: 'CTM'
+	patterns: [	{
+			begin: /#\(/
+			end: /\)#/
+			name: 'comment.block'
+		}
+		{
+			match: /%encoding\s+(?=(".+"|""".+""")\s*$).*/
+			name: 'comment.line.preprocessor'
+		}
+		{
+			match: /%version\s+(?=\S+\s*$).*/
+			name: 'comment.line.preprocessor'
+		}
+		{
+			match: /%prefix\s+\w+\s+(<[^>]+>)/
+			name: 'comment.line.preprocessor'
+		}
+				{
+			match: /%prefix\s+\w+\s+([a-zA-Z]+[a-zA-Z0-9+-.]*[:]\/\/([;.)]*[^\s;\].()]+)+)/
+			name: 'comment.line.preprocessor'
+		}
+		{
+			match: /%include\s+(<[^>]+>)/
+			name: 'comment.line.preprocessor'
+		}
+		{
+			match: /%include\s+([a-zA-Z]+[a-zA-Z0-9+-.]*[:]\/\/([;.)]*[^\s;\].()]+)+)/
+			name: 'comment.line.preprocessor'
+		}
+		{
+			match: /%(mergemap|include|ctm).*$/
+			name: 'comment.line.preprocessor'
+		}
+		{
+			match: /#[^\xA\xD]*/
+			name: 'comment.line.number-sign'
+		}
+		{
+			begin: /(?<=<)/
+			end: /(?=>)/
+			name: 'markup.underline.link'
+		}
+		{
+			match: /[a-zA-Z]+[a-zA-Z0-9+-.]*[:]\/\/([;.)]*[^\s;\].()]+)+/
+			name: 'markup.underline.link'
+		}
+		{
+			begin: /"""("{0,2})/
+			end: /(?<!""")"""(?!")/
+			name: 'string.quoted.triple'
+		}
+		{
+			begin: /"/
+			end: /"/
+			name: 'string.quoted.double'
+		}
+		{
+			match: /(isa|ako|instance-of|def|end)/
+			name: 'keyword.control.ctm'
+		}
+		{
+			match: /iko/
+			name: 'invalid.deprecated'
+		}
+		{
+			match: /\b\w+:[\w_-]+/
+			name: 'entity.name'
+		}
+		{
+			match: /[$]\w+/
+			name: 'variable.parameter'
+		}
+		{
+			match: /\b[\w_-]+(?=\s*\()/
+			name: 'support.function'
+		}
+		{
+			match: /(?<![.])(\d+[.]?\d*)/
+			name: 'constant.numeric'
+		}
+		{
+			match: /((?<!@)@(?!(\s*@)))|((?<!~)~(?!(\s*~)))|((?<!\^)(\^|\^\^)(?!(\s*\^)))/
+			name: 'keyword.operator'
+		}
+		{
+			match: /((?<![.])[.](?!(\s*[.])))|((?<!,),(?!(\s*,)))|((?<!;);(?!(\s*;)))|((?<!\[)\[(?!(\s*\[)))|((?<!\])\](?!(\s*\])))|((?<!-)-\s(?!(\s*-)))|((?<!\()\((?!(\s*\()))|((?<!\))\)(?!(\s*\))))|((?<!:):(?!(\s*:)))/
+			name: 'keyword.other'
+		}
+		{
+			match: /((?<!\*)\*(?!(\s*\*)))/
+			name: 'constant.numeric'
+		}
+		{
+			match: /%.*/
+			name: 'invalid.illegal'
+		}
+	]
+	scope_name: 'source.ctm'
+}
