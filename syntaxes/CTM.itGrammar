@@ -41,8 +41,7 @@
 			name: 'comment.line.number-sign'
 		}
 		{
-			begin: /(?<=<)/
-			end: /(?=>)/
+			match: /(?<=<)[^>]+(?=>)/
 			name: 'markup.underline.link'
 		}
 		{
